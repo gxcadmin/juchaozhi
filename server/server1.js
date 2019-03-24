@@ -47,6 +47,18 @@ app.get('/api/category',function(req,res){
         res.send(body);
     })
 })
+
+//搜索功能
+app.get('/api/search',function(req,res){
+    var searchValue = req.query.searchValue;
+    var searchURL = `https://mrobot.pconline.com.cn/s-300/best/search/listTopicSearch.xsp?searchCondition=${searchValue}&sectionId=0&searchType=4&pageNo=1&pageSize=20`
+    // console.log(usearchValue);
+    console.log(encodeURI(searchURL));
+    request(encodeURI(searchURL),function(error,response,body){
+        res.send(body);
+    })
+})
+
 // post请求和get请求在服务器端的处理方式是不一样的,所以需要特殊的插件来
 // 处理post请求,post请求的数据会存储到req.body对象里
 app.post('/login',urlencodedParser,function(req,res){
